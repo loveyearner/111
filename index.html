@@ -1,117 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>her  dreamy life</title>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #fdf6f9;
-      font-family: 'VT323', monospace;
-      font weight: 300;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>her dreamy life</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+<script>
+  new cursoreffects.fairyDustCursor({
+    colors: ["#f7cce2", "#f5e1f7", "#d6b3dd"]
+  });
+</script>
+<style>
+   body {
+    background: #fdf6f9;
+    font-family: 'VT323', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    user-select: none;
+  }
 
-    .wrapper {
-      width: 270px;
-      height: 480px;
-      background-color: #fff;
-      border: 4px solid #e7d5e6;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #eac9e6;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-    }
+.wrapper {
+  background: #fff9fc;
+  border: 4px solid #e7d5e6;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #eac9e6;
+  width: 90%;
+  max-width: 600px;
+  padding: 20px 25px;
+  box-sizing: border-box;
+}
 
-    .screen {
-      flex: 1;
-      background-color: #fff9fc;
-      border: 2px solid #e2c9e2;
-      border-radius: 6px;
-      padding: 9px;
-      overflow-y: auto;
-      font-size: 14px;
-      line-height: 1.4;
-      color: #555;
-      margin-bottom: 10px;
-    }
+.screen {
+  background: #fff9fc;
+  border: 2px solid #e2c9e2;
+  border-radius: 6px;
+  height: 130px;
+  margin-bottom: 20px;
+  padding: 12px;
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  position: relative;
+  font-weight: 400;
+  box-sizing: border-box;
+}
 
-    .keyboard {
-      background-color: #f3ecf5;
-      border: 2px solid #d5bfd9;
-      border-radius: 6px;
-      padding: 10px;
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 4px;
-      font-size: 15px;
-      color: #888;
-      text-align: center;
-    }
+  /* blinking caret */
+  .caret {
+    display: inline-block;
+    width: 8px;
+    height: 18px;
+    background-color: #b0668f;
+    margin-left: 2px;
+    animation: blink 1s steps(2, start) infinite;
+    vertical-align: bottom;
+    border-radius: 2px;
+  }
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
 
-    .key {
-      background-color: #fff;
-      border: 1px solid #d6c4da;
-      padding: 6px 0;
-      border-radius: 4px;
-      box-shadow: inset 0 0 2px #e0d1e6;
-    }
+  .keyboard {
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    grid-gap: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-    .wide {
-      grid-column: span 2;
-    }
+  /* Basic styling for keys */
+  .key {
+    background: #fff;
+    border: 1.5px solid #d6c4da;
+    border-radius: 6px;
+    box-shadow: inset 0 0 2px #e0d1e6;
+    color: #888;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: 
+      transform 0.1s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .key:active,
+  .key.pressed {
+    background-color: #f9e6f4;
+    color: #b0668f;
+    box-shadow: 0 0 8px #f7cce2;
+    transform: scale(0.95);
+  }
 
-    .space {
-      grid-column: span 6;
-    }
-
-    .send {
-      background-color: #fcddec;
-      border: 1px solid #ebbfd4;
-      color: #b0668f;
-      font-weight: bold
-    }
-  </style>
+  /* Different widths for special keys */
+  .key.backspace { grid-column: span 1.5; }
+  .key.tab { grid-column: span 2; }
+  .key.capslock { grid-column: span 2.5; }
+  .key.enter { grid-column: span 2.5; }
+  .key.shift { grid-column: span 2; }
+  .key.space { grid-column: span 8; }
+  .key.ctrl, .key.alt {
+    grid-column: span 1.7;
+  }
+</style>
 </head>
 <body>
   <div class="wrapper">
-    <div class="screen">
-      <p>hi angel! ꒰˶ˊ々ˋ˵꒱♡<br><br>
-      this space is my soft little online diary — a place for quiet thoughts, sleepy rambles, and sweet daydreams. i’m keeping it small and special, like a tiny jewelry box filled with things i love. i’ll be limiting my friends to around 300–400 only, just enough to keep this space warm and gentle 🤍<br><br>
-      i made this place just for me, and a small circle of kind souls. i’ll be keeping my friend list cozy, around 300 to 400 only. not out of pride, but for peace. i want this to stay personal and warm, like a journal you only let a few people peek into.<br><br>
-      you’ll see dreamy rambles, little write-ups, soft musings from my real life, and anything whimsical that stirs in me. this isn’t a performance. it’s a soft corner where i get to just be. and that means i’m only welcoming energy that feels calm, genuine, and kind.<br><br>
-      if someone disrupts that peace, even gently, i won’t explain—i’ll simply protect my space. i might unfriend, remove, or quietly drift away. please don’t take it personally, and please don’t question my boundaries. they’re here to help me feel safe.<br><br>
+    <div class="screen" id="screen"></div>
+    <div class="keyboard" id="keyboard">
+      <!-- Row 1: ` 1 2 3 4 5 6 7 8 9 0 - = Backspace -->
+      <div class="key">~</div>
+      <div class="key">1</div>
+      <div class="key">2</div>
+      <div class="key">3</div>
+      <div class="key">4</div>
+      <div class="key">5</div>
+      <div class="key">6</div>
+      <div class="key">7</div>
+      <div class="key">8</div>
+      <div class="key">9</div>
+      <div class="key">0</div>
+      <div class="key">-</div>
+      <div class="key">=</div>
+      <div class="key backspace">⌫</div>
 
-<p>♡ things that make my heart soft ♡<br>
-barbie everything (esp vintage & pink sparkly ones!), stickers, journals, and handwritten letters, typing softly at midnight with a warm drink, dreamy playlists & late night heart talks, soft pastels, baby pinks, and ribbons in my hair, fairy lights, star projectors & plushies on the bed, pretty words, soft poetry, and vintage love songs, romantic comedies & princesscore aesthetics, sleepy calls, angel numbers, and people who get me, writing long captions as if it’s a secret blog, cotton candy skies, ballet flats, pink milk.<br><br>
+      <!-- Row 2: Tab Q W E R T Y U I O P [ ] \ -->
+      <div class="key tab">Tab</div>
+      <div class="key">Q</div>
+      <div class="key">W</div>
+      <div class="key">E</div>
+      <div class="key">R</div>
+      <div class="key">T</div>
+      <div class="key">Y</div>
+      <div class="key">U</div>
+      <div class="key">I</div>
+      <div class="key">O</div>
+      <div class="key">P</div>
+      <div class="key">[</div>
+      <div class="key">]</div>
+      <div class="key">\</div>
 
-<p>｡ﾟ☁︎ nyaa or no thank u ☁︎｡⋆ <br>
-passive-aggressive posts / parinig culture, loud, draining energy & shallow conversations, immature people who can’t communicate gently, people who force interactions out of politeness, jealousy masked as support, veggies (esp okra eww 😖 lol), ghosting without explanation (just tell me please 🥺), when someone tries to outshine softness with sarcasm, being misunderstood in a space that’s meant to feel safe<br><br>
+      <!-- Row 3: CapsLock A S D F G H J K L ; ' Enter -->
+      <div class="key capslock">CapsLock</div>
+      <div class="key">A</div>
+      <div class="key">S</div>
+      <div class="key">D</div>
+      <div class="key">F</div>
+      <div class="key">G</div>
+      <div class="key">H</div>
+      <div class="key">J</div>
+      <div class="key">K</div>
+      <div class="key">L</div>
+      <div class="key">;</div>
+      <div class="key">'</div>
+      <div class="key enter">Enter</div>
 
-  <p> ˃ 𖥦 ˂  love space, people i share my heart with ♡
-bon, ate trishtine, kate, janeah, page, dolly (kim azhlie), yasha mae, ainslare, annie, riza, jdryx, yuri, nicole, nqzfirx, mama precious, vien, eunjo, dave, chromique, yuan, yuzo, uno, eon, vieon, xein, dincaln, jirx, bravia, anna, joylyn, yasmin, grace, aly, ligaya, anais, aliana, ray, afnan, ashley jade, xhaira, rinrin, destined, yuwen, kian, adalune, hiraya, hiraeth, luna, beatrice, nene, ate mon, ashianna, xairo, alekhine, jee, dapyo, jiara, ylissana, arzaineth, kylianne, yeliz, philomena, mauvy, slur, phire, ali, isefria, sifraj. <br><br>
-this space isn’t meant for everyone, and that’s okay (ˊo̴̶̷̤  ̫ o̴̶̷̤ˋ) i just want a corner of the internet that feels like a hug. thank you for respecting this space. it means more than you know.<br><br>
-with love always,<br>
-your softest girl ♡</p>
-    </div>
+      <!-- Row 4: Shift Z X C V B N M , . / Shift -->
+      <div class="key shift">Shift</div>
+      <div class="key">Z</div>
+      <div class="key">X</div>
+      <div class="key">C</div>
+      <div class="key">V</div>
+      <div class="key">B</div>
+      <div class="key">N</div>
+      <div class="key">M</div>
+      <div class="key">,</div>
+      <div class="key">.</div>
+      <div class="key">/</div>
+      <div class="key shift">Shift</div>
 
-    <div class="keyboard">
-      <div class="key">1</div><div class="key">2</div><div class="key">3</div><div class="key">4</div><div class="key">5</div>
-      <div class="key">6</div><div class="key">7</div><div class="key">8</div><div class="key">9</div><div class="key">0</div>
-      <div class="key">q</div><div class="key">w</div><div class="key">e</div><div class="key">r</div><div class="key">t</div>
-      <div class="key">y</div><div class="key">u</div><div class="key">i</div><div class="key">o</div><div class="key">p</div>
-      <div class="key">a</div><div class="key">s</div><div class="key">d</div><div class="key">f</div><div class="key">g</div>
-      <div class="key">h</div><div class="key">j</div><div class="key">k</div><div class="key">l</div><div class="key">⌫</div>
-      <div class="key">z</div><div class="key">x</div><div class="key">c</div><div class="key">v</div><div class="key">b</div>
-      <div class="key">n</div><div class="key">m</div><div class="key">.</div><div class="key">↵</div><div class="key">↑</div>
-      <div class="key">☼</div><div class="key">↺</div><div class="key">✧</div><div class="key space">SPACE</div><div class="key send">SEND</div>
+      <!-- Row 5: Ctrl Win Alt Space Alt Gr Menu Ctrl -->
+      <div class="key ctrl">Ctrl</div>
+      <div class="key">Win</div>
+      <div class="key alt">Alt</div>
+      <div class="key space">SPACE</div>
+      <div class="key">Alt Gr</div>
+      <div class="key">Menu</div>
+      <div class="key ctrl">Ctrl</div>
     </div>
   </div>
+
+  <audio id="typeSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_70f9e2b89d.mp3?filename=soft-keyboard-typing-7092.mp3"></audio>
+
+<script>
+  const screen = document.getElementById('screen');
+  const typeSound = document.getElementById('typeSound');
+  const keys = document.querySelectorAll('.key');
+
+  const message = `hi angel! ꒰˶ˊ々ˋ˵꒱♡
+
+this space is my soft little online diary — a place for quiet thoughts, sleepy rambles, and sweet daydreams. i’m keeping it small and special, like a tiny jewelry box filled with things i love. i’ll be limiting my friends to around 300–400 only, just enough to keep this space warm and gentle 🤍
+
+i made this place just for me, and a small circle of kind souls. i’ll be keeping my friend list cozy, around 300 to 400 only. not out of pride, but for peace. i want this to stay personal and warm, like a journal you only let a few people peek into.
+
+you’ll see dreamy rambles, little write-ups, soft musings from my real life, and anything whimsical that stirs in me. this isn’t a performance. it’s a soft corner where i get to just be. and that means i’m only welcoming energy that feels calm, genuine, and kind.
+
+if someone disrupts that peace, even gently, i won’t explain—i’ll simply protect my space. i might unfriend, remove, or quietly drift away. please don’t take it personally, and please don’t question my boundaries. they’re here to help me feel safe.
+
+♡ things that make my heart soft ♡
+barbie everything (esp vintage & pink sparkly ones!), stickers, journals, and handwritten letters, typing softly at midnight with a warm drink, dreamy playlists & late night heart talks, soft pastels, baby pinks, and ribbons in my hair, fairy lights, star projectors & plushies on the bed, pretty words, soft poetry, and vintage love songs, romantic comedies & princesscore aesthetics, sleepy calls, angel numbers, and people who get me, writing long captions as if it’s a secret blog, cotton candy skies, ballet flats, pink milk.
+
+｡ﾟ☁︎ nyaa or no thank u ☁︎｡⋆
+passive-aggressive posts / parinig culture, loud, draining energy & shallow conversations, immature people who can’t communicate gently, people who force interactions out of politeness, jealousy masked as support, veggies (esp okra eww 😖 lol), ghosting without explanation (just tell me please 🥺), when someone tries to outshine softness with sarcasm, being misunderstood in a space that’s meant to feel safe
+
+˃ 𖥦 ˂ love space, people i share my heart with ♡ bon, ate trishtine, kate, janeah, page, dolly (kim azhlie), yasha mae, ainslare, annie, riza, jdryx, yuri, nicole, nqzfirx, mama precious, vien, eunjo, nika, and many more 𖠋˃ ˂𖥦 ˂
+`;
+
+  let index = 0;
+  let typing = true;
+
+  function type() {
+    if (index < message.length) {
+      let char = message[index];
+      if (char === '\n') {
+        screen.innerHTML += '<br>';
+      } else {
+        screen.innerHTML += char;
+      }
+      index++;
+      typeSound.currentTime = 0;
+      typeSound.play();
+      pressRandomKey();
+      setTimeout(type, 30);
+    } else {
+      typing = false;
+      showCaret();
+    }
+  }
+
+  function showCaret() {
+    if (!document.querySelector('.caret')) {
+      const caret = document.createElement('span');
+      caret.className = 'caret';
+      screen.appendChild(caret);
+    }
+  }
+
+  // Animate key press visually when screen types
+  function pressRandomKey() {
+    if (!typing) return;
+    // pick a random visible key (not blank)
+    const visibleKeys = Array.from(keys).filter(k => k.textContent.trim() !== '');
+    const randomKey = visibleKeys[Math.floor(Math.random() * visibleKeys.length)];
+    randomKey.classList.add('pressed');
+    setTimeout(() => randomKey.classList.remove('pressed'), 150);
+  }
+
+  // Press random key synced with typing sound
+  typeSound.addEventListener('play', pressRandomKey);
+
+  // Optional: clicking keys won't input but show press effect
+  keys.forEach(key => {
+    key.addEventListener('mousedown', () => {
+      key.classList.add('pressed');
+      typeSound.currentTime = 0;
+      typeSound.play();
+    });
+    key.addEventListener('mouseup', () => {
+      key.classList.remove('pressed');
+    });
+  });
+
+  // Start typing on page load
+  window.onload = () => {
+    type();
+  };
+</script>
 </body>
 </html>
